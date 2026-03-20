@@ -161,6 +161,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#the-normal-cumulative-distribution-function" id="toc-the-normal-cumulative-distribution-function" class="nav-link" data-scroll-target="#the-normal-cumulative-distribution-function">The Normal Cumulative Distribution Function</a></li>
   <li><a href="#generating-random-values-with-rnorm" id="toc-generating-random-values-with-rnorm" class="nav-link" data-scroll-target="#generating-random-values-with-rnorm">Generating random values with <code>rnorm()</code></a></li>
   </ul></li>
+  <li><a href="#binomial-distribution" id="toc-binomial-distribution" class="nav-link" data-scroll-target="#binomial-distribution">Binomial Distribution</a>
+  <ul class="collapse">
+  <li><a href="#the-binomial-probability-density-function" id="toc-the-binomial-probability-density-function" class="nav-link" data-scroll-target="#the-binomial-probability-density-function">The Binomial Probability Density Function</a></li>
+  <li><a href="#the-binomial-cumulative-distribution-function" id="toc-the-binomial-cumulative-distribution-function" class="nav-link" data-scroll-target="#the-binomial-cumulative-distribution-function">The Binomial Cumulative Distribution Function</a></li>
+  <li><a href="#generating-random-values-with-rbinom" id="toc-generating-random-values-with-rbinom" class="nav-link" data-scroll-target="#generating-random-values-with-rbinom">Generating random values with <code>rbinom()</code></a></li>
+  </ul></li>
   <li><a href="#poisson-distribution" id="toc-poisson-distribution" class="nav-link" data-scroll-target="#poisson-distribution">Poisson Distribution</a>
   <ul class="collapse">
   <li><a href="#the-poisson-probability-density-function" id="toc-the-poisson-probability-density-function" class="nav-link" data-scroll-target="#the-poisson-probability-density-function">The Poisson Probability Density Function</a></li>
@@ -192,19 +198,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>We will need the Tidyverse libraries and some default settings:</p>
+<p>While writing the [Randomness Concept][concept-randomness] for the Exercism learning syllabus, there was some uncertainty about what all the various R functions do. Here, we demonstrate several them in action.</p>
+<p>The <code>q*()</code> functions, to generate the quantiles, are not (yet) included.</p>
+<p>First, we need the Tidyverse libraries and some default settings:</p>
 <div class="cell" title="imports">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set_theme</span>(<span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">14</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set_theme</span>(<span class="fu">theme_gray</span>(<span class="at">base_size =</span> <span class="dv">16</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 <section id="normalgaussian-distribution" class="level2">
 <h2 class="anchored" data-anchor-id="normalgaussian-distribution">Normal/Gaussian Distribution</h2>
+<p>This is the classic “bell-shaped curve”.</p>
 <section id="the-normal-probability-density-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-normal-probability-density-function">The Normal Probability Density Function</h3>
+<p>The <code>dnorm()</code> function calculates the PDF at a point: the height of the curve at that point.</p>
+<p>Different values for standard deviation are shown. Higher values lead to wider, flatter curves.</p>
+<p>All means default to zero.</p>
 <div class="cell" title="normal PDF">
 <details class="code-fold">
 <summary>Code</summary>
@@ -235,6 +247,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="the-normal-cumulative-distribution-function" class="level3">
 <h3 class="anchored" data-anchor-id="the-normal-cumulative-distribution-function">The Normal Cumulative Distribution Function</h3>
+<p>The <code>pnorm()</code> function calculates the CDF at a point: the integral of the curve to the left of that point.</p>
 <div class="cell" title="normal CDF">
 <details class="code-fold">
 <summary>Code</summary>
@@ -265,6 +278,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="generating-random-values-with-rnorm" class="level3">
 <h3 class="anchored" data-anchor-id="generating-random-values-with-rnorm">Generating random values with <code>rnorm()</code></h3>
+<p>The <code>rnorm()</code> function generates random values which are normally distributed.</p>
+<p>Here, we get 10,000 values, using a frequency polygon to bin them, and count number in each bin for the <code>y</code> axis.</p>
 <div class="cell" title="random normal">
 <details class="code-fold">
 <summary>Code</summary>
@@ -294,27 +309,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="poisson-distribution" class="level2">
-<h2 class="anchored" data-anchor-id="poisson-distribution">Poisson Distribution</h2>
-<section id="the-poisson-probability-density-function" class="level3">
-<h3 class="anchored" data-anchor-id="the-poisson-probability-density-function">The Poisson Probability Density Function</h3>
-<div class="cell" title="Poisson PDF">
+<section id="binomial-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="binomial-distribution">Binomial Distribution</h2>
+<p>Here we use the example of 20 coin flips, counting the number that come up heads.</p>
+<p>Three probabilities are used:</p>
+<ul>
+<li><code>p = 0.4</code> for a coin biased to tails.</li>
+<li><code>p = 0.5</code> for a fair coin.</li>
+<li><code>p = 0.6</code> for a coin biased to heads.</li>
+</ul>
+<section id="the-binomial-probability-density-function" class="level3">
+<h3 class="anchored" data-anchor-id="the-binomial-probability-density-function">The Binomial Probability Density Function</h3>
+<div class="cell" title="Binomial PDF">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x"</span> <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 1"</span> <span class="ot">=</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 4"</span> <span class="ot">=</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 8"</span> <span class="ot">=</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">8</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x"</span> <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.4"</span> <span class="ot">=</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.4</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.5"</span> <span class="ot">=</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.5</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.6"</span> <span class="ot">=</span> <span class="fu">dbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.6</span>)</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">|&gt;</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"lambda = "</span>),</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"lambda"</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"p = "</span>),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"p"</span>,</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> lambda)) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> p)) <span class="sc">+</span></span>
 <span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lambda, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>p, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
@@ -326,26 +348,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="the-poisson-cumulative-distribution-function" class="level3">
-<h3 class="anchored" data-anchor-id="the-poisson-cumulative-distribution-function">The Poisson Cumulative Distribution Function</h3>
-<div class="cell" title="Poisson CDF">
+<section id="the-binomial-cumulative-distribution-function" class="level3">
+<h3 class="anchored" data-anchor-id="the-binomial-cumulative-distribution-function">The Binomial Cumulative Distribution Function</h3>
+<div class="cell" title="Binomial CDF">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x"</span> <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 1"</span> <span class="ot">=</span> <span class="fu">ppois</span>(x, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 4"</span> <span class="ot">=</span> <span class="fu">ppois</span>(x, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 8"</span> <span class="ot">=</span> <span class="fu">ppois</span>(x, <span class="at">lambda =</span> <span class="dv">8</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x"</span> <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.4"</span> <span class="ot">=</span> <span class="fu">pbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.4</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.5"</span> <span class="ot">=</span> <span class="fu">pbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.5</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.6"</span> <span class="ot">=</span> <span class="fu">pbinom</span>(x, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.6</span>)</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">|&gt;</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"lambda = "</span>),</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"lambda"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"p = "</span>),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"p"</span>,</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> lambda)) <span class="sc">+</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lambda, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> p)) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>p, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
@@ -356,31 +378,126 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="generating-random-values-with-rpois" class="level3">
-<h3 class="anchored" data-anchor-id="generating-random-values-with-rpois">Generating random values with <code>rpois()</code></h3>
-<div class="cell" title="random normal">
+<section id="generating-random-values-with-rbinom" class="level3">
+<h3 class="anchored" data-anchor-id="generating-random-values-with-rbinom">Generating random values with <code>rbinom()</code></h3>
+<div class="cell" title="random binomial">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 1"</span> <span class="ot">=</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 4"</span> <span class="ot">=</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 8"</span> <span class="ot">=</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">8</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.4"</span> <span class="ot">=</span> <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.4</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.5"</span> <span class="ot">=</span> <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.5</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"p = 0.6"</span> <span class="ot">=</span> <span class="fu">rbinom</span>(n, <span class="at">size =</span> <span class="dv">20</span>, <span class="at">prob =</span> <span class="fl">0.6</span>)</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">|&gt;</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"lambda = "</span>),</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"lambda"</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"p = "</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"p"</span>,</span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> lambda)) <span class="sc">+</span> </span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lambda, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> p)) <span class="sc">+</span> </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>p, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
 <p><img src="statdist-r_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="poisson-distribution" class="level2">
+<h2 class="anchored" data-anchor-id="poisson-distribution">Poisson Distribution</h2>
+<p>Here we use the example of how many meteorites at least 1m in diameter strike the Earth each year.</p>
+<p>The <code>lambda</code> values are different assumptions for the <em>average</em> number. The [Catalina Sky Survey][web-catalina] discuss this and estimate such strikes happen “every few months”, so <code>lambda = 4</code> is a reasonable guess.</p>
+<section id="the-poisson-probability-density-function" class="level3">
+<h3 class="anchored" data-anchor-id="the-poisson-probability-density-function">The Poisson Probability Density Function</h3>
+<div class="cell" title="Poisson PDF">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x"</span> <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 1"</span> <span class="ot">=</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 4"</span> <span class="ot">=</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 8"</span> <span class="ot">=</span> <span class="fu">dpois</span>(x, <span class="at">lambda =</span> <span class="dv">8</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">|&gt;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"lambda = "</span>),</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"lambda"</span>,</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> lambda)) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lambda, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statdist-r_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="the-poisson-cumulative-distribution-function" class="level3">
+<h3 class="anchored" data-anchor-id="the-poisson-cumulative-distribution-function">The Poisson Cumulative Distribution Function</h3>
+<div class="cell" title="Poisson CDF">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"x"</span> <span class="ot">=</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">15</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 1"</span> <span class="ot">=</span> <span class="fu">ppois</span>(x, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 4"</span> <span class="ot">=</span> <span class="fu">ppois</span>(x, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 8"</span> <span class="ot">=</span> <span class="fu">ppois</span>(x, <span class="at">lambda =</span> <span class="dv">8</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"lambda = "</span>),</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"lambda"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> value, <span class="at">color =</span> lambda)) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lambda, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statdist-r_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="generating-random-values-with-rpois" class="level3">
+<h3 class="anchored" data-anchor-id="generating-random-values-with-rpois">Generating random values with <code>rpois()</code></h3>
+<div class="cell" title="random normal">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 1"</span> <span class="ot">=</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">1</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 4"</span> <span class="ot">=</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">4</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"lambda = 8"</span> <span class="ot">=</span> <span class="fu">rpois</span>(n, <span class="at">lambda =</span> <span class="dv">8</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)  <span class="sc">|&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"lambda = "</span>),</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"lambda"</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"value"</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(value, <span class="at">color =</span> lambda)) <span class="sc">+</span> </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">facet_wrap</span>(<span class="sc">~</span>lambda, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="statdist-r_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>

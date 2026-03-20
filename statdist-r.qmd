@@ -9,11 +9,16 @@ format:
     number-sections: true
     geometry:
       - top=15mm
-      - bottom=15mm
+      - bottom=20mm
       - heightrounded
 ---
 
-We will need the Tidyverse libraries and some default settings:
+While writing the [Randomness Concept][concept-randomness] for the Exercism learning syllabus, there was some uncertainty about what all the various R functions do.
+Here, we demonstrate several them in action.
+
+The `q*()` functions, to generate the quantiles, are not (yet) included.
+
+First, we need the Tidyverse libraries and some default settings:
 
 ```{r}
 #| title: imports
@@ -21,12 +26,21 @@ We will need the Tidyverse libraries and some default settings:
 
 library(tidyverse)
 
-set_theme(theme_gray(base_size = 14))
+set_theme(theme_gray(base_size = 16))
 ```
 
 ## Normal/Gaussian Distribution
 
+This is the classic "bell-shaped curve".
+
 ### The Normal Probability Density Function
+
+The `dnorm()` function calculates the PDF at a point: the height of the curve at that point.
+
+Different values for standard deviation are shown.
+Higher values lead to wider, flatter curves.
+
+All means default to zero.
 
 ```{r}
 #| title: normal PDF
@@ -50,6 +64,8 @@ tibble(
 
 ### The Normal Cumulative Distribution Function
 
+The `pnorm()` function calculates the CDF at a point: the integral of the curve to the left of that point.
+
 ```{r}
 #| title: normal CDF
 
@@ -72,6 +88,10 @@ tibble(
 
 ### Generating random values with `rnorm()`
 
+The `rnorm()` function generates random values which are normally distributed.
+
+Here, we get 10,000 values, using a frequency polygon to bin them, and count number in each bin for the `y` axis.
+
 ```{r}
 #| title: random normal
 
@@ -92,7 +112,88 @@ tibble(
     theme(legend.position = "none")
 ```
 
+## Binomial Distribution
+
+Here we use the example of 20 coin flips, counting the number that come up heads.
+
+Three probabilities are used:
+
+- `p = 0.4` for a coin biased to tails.
+- `p = 0.5` for a fair coin.
+- `p = 0.6` for a coin biased to heads.
+
+### The Binomial Probability Density Function
+
+```{r}
+#| title: Binomial PDF
+
+tibble(
+  "x" = 0:20,
+  "p = 0.4" = dbinom(x, size = 20, prob = 0.4),
+  "p = 0.5" = dbinom(x, size = 20, prob = 0.5),
+  "p = 0.6" = dbinom(x, size = 20, prob = 0.6)
+)  |>
+  pivot_longer(
+    cols = starts_with("p = "),
+    names_to = "p",
+    values_to = "value"
+  ) |>
+  ggplot(aes(x = x, y = value, color = p)) +
+    geom_col() +
+    facet_wrap(~p, ncol = 1) +
+    theme(legend.position = "none")
+```
+
+### The Binomial Cumulative Distribution Function
+
+```{r}
+#| title: Binomial CDF
+
+tibble(
+  "x" = 0:20,
+  "p = 0.4" = pbinom(x, size = 20, prob = 0.4),
+  "p = 0.5" = pbinom(x, size = 20, prob = 0.5),
+  "p = 0.6" = pbinom(x, size = 20, prob = 0.6)
+)  |>
+  pivot_longer(
+    cols = starts_with("p = "),
+    names_to = "p",
+    values_to = "value"
+  ) |>
+  ggplot(aes(x = x, y = value, color = p)) +
+  geom_col() +
+  facet_wrap(~p, ncol = 1) +
+  theme(legend.position = "none")
+```
+
+### Generating random values with `rbinom()`
+
+```{r}
+#| title: random binomial
+
+n <- 10000
+tibble(
+  "p = 0.4" = rbinom(n, size = 20, prob = 0.4),
+  "p = 0.5" = rbinom(n, size = 20, prob = 0.5),
+  "p = 0.6" = rbinom(n, size = 20, prob = 0.6)
+)  |>
+  pivot_longer(
+    cols = starts_with("p = "),
+    names_to = "p",
+    values_to = "value"
+  ) |>
+  ggplot(aes(value, color = p)) + 
+  geom_bar() +
+  facet_wrap(~p, ncol = 1) +
+  theme(legend.position = "none")
+```
+
 ## Poisson Distribution
+
+Here we use the example of how many meteorites at least 1m in diameter strike the Earth each year.
+
+The `lambda` values are different assumptions for the _average_ number.
+The [Catalina Sky Survey][web-catalina] discuss this and estimate such strikes happen "every few months", so `lambda = 4` is a reasonable guess.
 
 ### The Poisson Probability Density Function
 
