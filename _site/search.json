@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "statdist-r.html",
+    "href": "statdist-r.html",
+    "title": "Statistical Distributions in R",
+    "section": "",
+    "text": "We will need the Tidyverse libraries:\nCode\nlibrary(tidyverse)"
+  },
+  {
+    "objectID": "statdist-r.html#normalgaussian-distribution",
+    "href": "statdist-r.html#normalgaussian-distribution",
+    "title": "Statistical Distributions in R",
+    "section": "Normal/Gaussian Distribution",
+    "text": "Normal/Gaussian Distribution\n\nThe Normal Probability Density Function\n\n\nCode\ntibble(\n  \"x\" = seq(-4, 4, length.out = 1000),\n  \"SD = 0.5\" = dnorm(x, sd = 0.5),\n  \"SD = 1\" = dnorm(x, sd = 1),\n  \"SD = 2\" = dnorm(x, sd = 2)\n)  |&gt;\n  pivot_longer(\n    cols = starts_with(\"SD = \"),\n    names_to = \"SD\",\n    values_to = \"value\"\n  ) |&gt;\n  ggplot(aes(x = x, y = value, color = SD)) +\n    geom_line() +\n    facet_wrap(~SD, ncol = 1)\n\n\n\n\n\n\n\n\n\n\n\nThe Normal Cumulative Distribution Function\n\n\nCode\ntibble(\n  \"x\" = seq(-4, 4, length.out = 1000),\n  \"SD = 0.5\" = pnorm(x, sd = 0.5),\n  \"SD = 1\" = pnorm(x, sd = 1),\n  \"SD = 2\" = pnorm(x, sd = 2)\n)  |&gt;\n  pivot_longer(\n    cols = starts_with(\"SD = \"),\n    names_to = \"SD\",\n    values_to = \"value\"\n  ) |&gt;\n  ggplot(aes(x = x, y = value, color = SD)) +\n  geom_line() +\n  facet_wrap(~SD, ncol = 1)\n\n\n\n\n\n\n\n\n\n\n\nGenerating random values with rnorm()\n\n\nCode\nn &lt;- 10000\ntibble(\n  \"SD = 0.5\" = rnorm(n, sd = 0.5),\n  \"SD = 1\" = rnorm(n, sd = 1),\n  \"SD = 2\" = rnorm(n, sd = 2)\n)  |&gt;\n  pivot_longer(\n    cols = starts_with(\"SD = \"),\n    names_to = \"SD\",\n    values_to = \"value\"\n  ) |&gt;\n  ggplot(aes(value, color = SD)) + \n    geom_freqpoly(binwidth = 0.05) +\n    facet_wrap(~SD, ncol = 1)"
+  },
+  {
+    "objectID": "statdist-r.html#poisson-distribution",
+    "href": "statdist-r.html#poisson-distribution",
+    "title": "Statistical Distributions in R",
+    "section": "Poisson Distribution",
+    "text": "Poisson Distribution\n\nThe Poisson Probability Density Function\n\n\nCode\ntibble(\n  \"x\" = 0:15,\n  \"lambda = 1\" = dpois(x, lambda = 1),\n  \"lambda = 4\" = dpois(x, lambda = 4),\n  \"lambda = 8\" = dpois(x, lambda = 8)\n)  |&gt;\n  pivot_longer(\n    cols = starts_with(\"lambda = \"),\n    names_to = \"lambda\",\n    values_to = \"value\"\n  ) |&gt;\n  ggplot(aes(x = x, y = value, color = lambda)) +\n    geom_col() +\n    facet_wrap(~lambda, ncol = 1)\n\n\n\n\n\n\n\n\n\n\n\nThe Poisson Cumulative Distribution Function\n\n\nCode\ntibble(\n  \"x\" = 0:15,\n  \"lambda = 1\" = ppois(x, lambda = 1),\n  \"lambda = 4\" = ppois(x, lambda = 4),\n  \"lambda = 8\" = ppois(x, lambda = 8)\n)  |&gt;\n  pivot_longer(\n    cols = starts_with(\"lambda = \"),\n    names_to = \"lambda\",\n    values_to = \"value\"\n  ) |&gt;\n  ggplot(aes(x = x, y = value, color = lambda)) +\n  geom_col() +\n  facet_wrap(~lambda, ncol = 1)\n\n\n\n\n\n\n\n\n\n\n\nGenerating random values with rpois()\n\n\nCode\nn &lt;- 10000\ntibble(\n  \"lambda = 1\" = rpois(n, lambda = 1),\n  \"lambda = 4\" = rpois(n, lambda = 4),\n  \"lambda = 8\" = rpois(n, lambda = 8)\n)  |&gt;\n  pivot_longer(\n    cols = starts_with(\"lambda = \"),\n    names_to = \"lambda\",\n    values_to = \"value\"\n  ) |&gt;\n  ggplot(aes(value, color = lambda)) + \n    geom_bar() +\n    facet_wrap(~lambda, ncol = 1)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "supplementary_docs",
+    "section": "",
+    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  }
+]
