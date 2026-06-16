@@ -4,7 +4,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "Exercism is an educational non-profit aiming to help students improve their programming fluency across a wide range of languages (currently 80+, and still growing).\nWithin the community of Exercism maintainers, those of us who work on the Julia, Python and R (JuPyteR) tracks have a particular interest in scientific computing and data science. Some of this interest is expresseed in the teaching syllabus documents on the Exercism website. At the more technical end, we run up against the limits of what Exercism is designed to do.\nThis GitHub Pages site is an experiment to let us explore the wider capabilities of these three languages: both for our own self-education, and to to provide a “See Also” resource for the minority of student who want to the learn more."
+    "text": "Exercism is an educational non-profit aiming to help students improve their programming fluency across a wide range of languages (currently 80+, and still growing).\nWithin the community of Exercism maintainers, those of us who work on the Julia, Python and R (JuPyteR) tracks have a particular interest in scientific computing and data science. Some of this interest is expressed in the teaching syllabus documents on the Exercism website. At the more technical end, we run up against the limits of what Exercism is designed to do.\nThis GitHub Pages site is an experiment to let us explore the wider capabilities of these three languages: both for our own self-education, and to to provide a “See Also” resource for the minority of students who want to learn more."
   },
   {
     "objectID": "statdist-r.html",
@@ -37,8 +37,43 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "supplementary_docs",
+    "title": "Supplementary Documents",
     "section": "",
-    "text": "This site is partly a playground for maintainers of the [Exercism][web-exercism] scientific tracks, and partly a supplemntal source for interested students.\nEarly content is [in R][statdist-r.qmd]. Python and Julia will be added as time allows.\n\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "This site is partly a playground for maintainers of the Exercism scientific tracks, and partly a supplemntal source for interested students.\nEarly content is in R. Python and Julia will be added as time allows.\n\nThis is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+  },
+  {
+    "objectID": "data-ops.html",
+    "href": "data-ops.html",
+    "title": "Data Operations",
+    "section": "",
+    "text": "The R Learning Syllabus is pretty much our first opportunity within Exercism to explore data science operations with dataframes. The traditional data.frame and newer tibble are include in the test runner, along with Tidyverse libraries such as dplyr, readr, tidyr and forcats.\nIn contrast, the Python track is beginner-biased (they get a lot of newbies) and limited to Core Python.\nHence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).\nThe current plan ague aspiration cover all these combinations:\n\n\n\n\nR\nPython\n\n\n\n\ndata.frame\n✔️\n\n\n\ntibble\n✔️\n\n\n\nPandas\n\n✔️\n\n\nPolars\n✔️\n\n\n\nDuckDB\n✔️\n✔️\n\n\nPostgreSQL\n✔️\n✔️"
+  },
+  {
+    "objectID": "data-ops.html#quarto",
+    "href": "data-ops.html#quarto",
+    "title": "Data Operations",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "data-ops.html#running-code",
+    "href": "data-ops.html#running-code",
+    "title": "Data Operations",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n\nCode\n1 + 1\n\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "data-ops.html#aims",
+    "href": "data-ops.html#aims",
+    "title": "Data Operations",
+    "section": "",
+    "text": "The R Learning Syllabus is pretty much our first opportunity within Exercism to explore data science operations with dataframes. The traditional data.frame and newer tibble are include in the test runner, along with Tidyverse libraries such as dplyr, readr, tidyr and forcats.\nIn contrast, the Python track is beginner-biased (they get a lot of newbies) and limited to Core Python.\nHence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).\nThe current plan ague aspiration cover all these combinations:\n\n\n\n\nR\nPython\n\n\n\n\ndata.frame\n✔️\n\n\n\ntibble\n✔️\n\n\n\nPandas\n\n✔️\n\n\nPolars\n✔️\n\n\n\nDuckDB\n✔️\n✔️\n\n\nPostgreSQL\n✔️\n✔️"
+  },
+  {
+    "objectID": "data-ops.html#setup",
+    "href": "data-ops.html#setup",
+    "title": "Data Operations",
+    "section": "Setup",
+    "text": "Setup\nTODO"
   }
 ]
