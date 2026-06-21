@@ -46,7 +46,7 @@
     "href": "data-ops.html",
     "title": "Data Operations",
     "section": "",
-    "text": "The R Learning Syllabus is pretty much our first opportunity within Exercism to explore data science operations with dataframes. The traditional data.frame and newer tibble are include in the test runner, along with Tidyverse libraries such as dplyr, readr, tidyr and forcats.\nIn contrast, the Python track is beginner-biased (they get a lot of newbies) and limited to Core Python.\nHence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).\nThe current plan ague aspiration cover all these combinations:\n\n\n\n\nR\nPython\n\n\n\n\ndata.frame\n✔️\n\n\n\ntibble\n✔️\n\n\n\nPandas\n\n✔️\n\n\nPolars\n✔️\n\n\n\nDuckDB\n✔️\n✔️\n\n\nPostgreSQL\n✔️\n✔️"
+    "text": "The R Learning Syllabus is pretty much our first opportunity within Exercism to explore data science operations with dataframes. The traditional data.frame and newer tibble are include in the test runner, along with Tidyverse libraries such as dplyr, readr, tidyr and forcats.\nIn contrast, the Python track is beginner-biased (they get a lot of newbies) and limited to Core Python.\nHence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).\nThe current plan vague aspiration cover all these combinations:\n\n\n\n\nR\nPython\nJulia\n\n\n\n\ndata.frame\n✔️\n\n\n\n\ntibble\n✔️\n\n\n\n\ndata.table\n✔️\n\n\n\n\npandas\n\n✔️\n\n\n\nDataFrames\n\n\n✔️\n\n\nPolars\n✔️\n✔️\n✔️\n\n\nDuckDB\n✔️\n✔️\n✔️\n\n\nPostgreSQL\n✔️\n✔️\n✔️\n\n\nArrow\n✔️\n✔️\n✔️\n\n\nDask\n\n✔️"
   },
   {
     "objectID": "data-ops.html#quarto",
@@ -67,7 +67,7 @@
     "href": "data-ops.html#aims",
     "title": "Data Operations",
     "section": "",
-    "text": "The R Learning Syllabus is pretty much our first opportunity within Exercism to explore data science operations with dataframes. The traditional data.frame and newer tibble are include in the test runner, along with Tidyverse libraries such as dplyr, readr, tidyr and forcats.\nIn contrast, the Python track is beginner-biased (they get a lot of newbies) and limited to Core Python.\nHence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).\nThe current plan ague aspiration cover all these combinations:\n\n\n\n\nR\nPython\n\n\n\n\ndata.frame\n✔️\n\n\n\ntibble\n✔️\n\n\n\nPandas\n\n✔️\n\n\nPolars\n✔️\n\n\n\nDuckDB\n✔️\n✔️\n\n\nPostgreSQL\n✔️\n✔️"
+    "text": "The R Learning Syllabus is pretty much our first opportunity within Exercism to explore data science operations with dataframes. The traditional data.frame and newer tibble are include in the test runner, along with Tidyverse libraries such as dplyr, readr, tidyr and forcats.\nIn contrast, the Python track is beginner-biased (they get a lot of newbies) and limited to Core Python.\nHence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).\nThe current plan vague aspiration cover all these combinations:\n\n\n\n\nR\nPython\nJulia\n\n\n\n\ndata.frame\n✔️\n\n\n\n\ntibble\n✔️\n\n\n\n\ndata.table\n✔️\n\n\n\n\npandas\n\n✔️\n\n\n\nDataFrames\n\n\n✔️\n\n\nPolars\n✔️\n✔️\n✔️\n\n\nDuckDB\n✔️\n✔️\n✔️\n\n\nPostgreSQL\n✔️\n✔️\n✔️\n\n\nArrow\n✔️\n✔️\n✔️\n\n\nDask\n\n✔️"
   },
   {
     "objectID": "data-ops.html#setup",
@@ -75,5 +75,89 @@
     "title": "Data Operations",
     "section": "Setup",
     "text": "Setup\nTODO"
+  },
+  {
+    "objectID": "data-ops.html#subsetting",
+    "href": "data-ops.html#subsetting",
+    "title": "Data Operations",
+    "section": "Subsetting",
+    "text": "Subsetting\nTODO"
+  },
+  {
+    "objectID": "data-ops.html#tools",
+    "href": "data-ops.html#tools",
+    "title": "Data Operations",
+    "section": "Tools",
+    "text": "Tools\ndata.frame is part of Base R, and always available to R code.\ntibble is a Tidyverse package. Because it is common for modern R code to start with library(tidyverse) (even within Exercism), it will often be available, as will packages such as dplyr to manipulate tibbles.\nNone of the remaining tools are available in the Exercism R or Python tracks. For local use, they must be installed separately.\ndata.table\npandas is the oldest type of Python dataframe, very widely used.\nPolars is a newer Rust-based dataframe type, with binding for several languages including R, Python and Julia. Reputed to be very fast with larger datasets.\nDuckDB is an in-process database (OLAP) server, based mainly (not exclusively) on SQL queries.\nPostgreSQL is a powerful, open-source relational database server.\nApache Arrow is a language-independent columnar memory format for flat and nested data. Libraries to work with rrow data exist for many languages, including R, Python and Julia.\nDask is a pure Python package, pandas-like but optimized for parallel processing of large datasets."
+  },
+  {
+    "objectID": "data-ops.html#usage",
+    "href": "data-ops.html#usage",
+    "title": "Data Operations",
+    "section": "Usage",
+    "text": "Usage\nFor simplicity, examples are split into multiple language-specific documents\n\nBasics\n\nR examples\nPython examples\nJulia examples"
+  },
+  {
+    "objectID": "data-ops/jl-basics.html",
+    "href": "data-ops/jl-basics.html",
+    "title": "Julla basics",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "data-ops/jl-basics.html#setup",
+    "href": "data-ops/jl-basics.html#setup",
+    "title": "Julla basics",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "data-ops/jl-basics.html#subsetting",
+    "href": "data-ops/jl-basics.html#subsetting",
+    "title": "Julla basics",
+    "section": "Subsetting",
+    "text": "Subsetting\nTODO"
+  },
+  {
+    "objectID": "data-ops/r-basics.html",
+    "href": "data-ops/r-basics.html",
+    "title": "R basics",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "data-ops/r-basics.html#setup",
+    "href": "data-ops/r-basics.html#setup",
+    "title": "R basics",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "data-ops/r-basics.html#subsetting",
+    "href": "data-ops/r-basics.html#subsetting",
+    "title": "R basics",
+    "section": "Subsetting",
+    "text": "Subsetting\nTODO"
+  },
+  {
+    "objectID": "data-ops/py-basics.html",
+    "href": "data-ops/py-basics.html",
+    "title": "Python basics",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "data-ops/py-basics.html#setup",
+    "href": "data-ops/py-basics.html#setup",
+    "title": "Python basics",
+    "section": "",
+    "text": "TODO"
+  },
+  {
+    "objectID": "data-ops/py-basics.html#subsetting",
+    "href": "data-ops/py-basics.html#subsetting",
+    "title": "Python basics",
+    "section": "Subsetting",
+    "text": "Subsetting\nTODO"
   }
 ]

@@ -125,7 +125,13 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#aims" id="toc-aims" class="nav-link active" data-scroll-target="#aims">Aims</a></li>
+  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
+  <li><a href="#usage" id="toc-usage" class="nav-link" data-scroll-target="#usage">Usage</a>
+  <ul class="collapse">
+  <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
+  </ul></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting">Subsetting</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="data-ops.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -156,13 +162,14 @@ ul.task-list li input[type="checkbox"] {
 <p>The <a href="https://exercism.org/tracks/r/concepts">R Learning Syllabus</a> is pretty much our first opportunity within <a href="https://exercism.org/">Exercism</a> to explore data science operations with dataframes. The traditional <code>data.frame</code> and newer <code>tibble</code> are include in the test runner, along with Tidyverse libraries such as <code>dplyr</code>, <code>readr</code>, <code>tidyr</code> and <code>forcats</code>.</p>
 <p>In contrast, the <a href="https://exercism.org/tracks/python">Python track</a> is beginner-biased (they get a <em>lot</em> of newbies) and limited to Core Python.</p>
 <p>Hence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).</p>
-<p>The current <del>plan</del> ague aspiration cover all these combinations:</p>
+<p>The current <del>plan</del> vague aspiration cover all these combinations:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
 <th style="text-align: center;">R</th>
 <th style="text-align: center;">Python</th>
+<th style="text-align: center;">Julia</th>
 </tr>
 </thead>
 <tbody>
@@ -170,24 +177,41 @@ ul.task-list li input[type="checkbox"] {
 <td>data.frame</td>
 <td style="text-align: center;">✔️</td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="even">
 <td>tibble</td>
 <td style="text-align: center;">✔️</td>
 <td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
 </tr>
 <tr class="odd">
-<td>Pandas</td>
+<td>data.table</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="even">
+<td>pandas</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr class="odd">
+<td>DataFrames</td>
+<td style="text-align: center;"></td>
 <td style="text-align: center;"></td>
 <td style="text-align: center;">✔️</td>
 </tr>
 <tr class="even">
 <td>Polars</td>
 <td style="text-align: center;">✔️</td>
-<td style="text-align: center;"></td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
 </tr>
 <tr class="odd">
 <td>DuckDB</td>
+<td style="text-align: center;">✔️</td>
 <td style="text-align: center;">✔️</td>
 <td style="text-align: center;">✔️</td>
 </tr>
@@ -195,12 +219,54 @@ ul.task-list li input[type="checkbox"] {
 <td>PostgreSQL</td>
 <td style="text-align: center;">✔️</td>
 <td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+</tr>
+<tr class="odd">
+<td>Arrow</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;">✔️</td>
+</tr>
+<tr class="even">
+<td>Dask</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">✔️</td>
+<td style="text-align: center;"></td>
 </tr>
 </tbody>
 </table>
 </section>
+<section id="tools" class="level2">
+<h2 class="anchored" data-anchor-id="tools">Tools</h2>
+<p><a href="https://bioinformatics.ccr.cancer.gov/docs/rintro/Lesson_3/"><strong>data.frame</strong></a> is part of Base R, and always available to R code.</p>
+<p><a href="https://tibble.tidyverse.org/index.html"><strong>tibble</strong></a> is a Tidyverse package. Because it is common for modern R code to start with <code>library(tidyverse)</code> (even within Exercism), it will often be available, as will packages such as <code>dplyr</code> to manipulate tibbles.</p>
+<p><em>None of the remaining tools are available in the Exercism R or Python tracks. For local use, they must be installed separately.</em></p>
+<p><a href="https://r-datatable.com/"><strong>data.table</strong></a></p>
+<p><a href="https://pandas.pydata.org/"><strong>pandas</strong></a> is the oldest type of Python dataframe, very widely used.</p>
+<p><a href="https://pola.rs/"><strong>Polars</strong></a> is a newer Rust-based dataframe type, with binding for several languages including R, Python and Julia. Reputed to be very fast with larger datasets.</p>
+<p><a href="https://duckdb.org/"><strong>DuckDB</strong></a> is an in-process database (OLAP) server, based mainly (not exclusively) on SQL queries.</p>
+<p><a href="https://www.postgresql.org/"><strong>PostgreSQL</strong></a> is a powerful, open-source relational database server.</p>
+<p><a href="https://arrow.apache.org/"><strong>Apache Arrow</strong></a> is a language-independent columnar memory format for flat and nested data. Libraries to work with rrow data exist for many languages, including R, Python and Julia.</p>
+<p><a href="https://www.dask.org/"><strong>Dask</strong></a> is a pure Python package, pandas-like but optimized for parallel processing of large datasets.</p>
+</section>
+<section id="usage" class="level2">
+<h2 class="anchored" data-anchor-id="usage">Usage</h2>
+<p>For simplicity, examples are split into multiple language-specific documents</p>
+<section id="basics" class="level3">
+<h3 class="anchored" data-anchor-id="basics">Basics</h3>
+<ul>
+<li><a href="./data-ops/r-basics.html">R examples</a></li>
+<li><a href="./data-ops/py-basics.html">Python examples</a></li>
+<li><a href="./data-ops/jl-basics.html">Julia examples</a></li>
+</ul>
+</section>
+</section>
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>TODO</p>
+</section>
+<section id="subsetting" class="level2">
+<h2 class="anchored" data-anchor-id="subsetting">Subsetting</h2>
 <p>TODO</p>
 
 

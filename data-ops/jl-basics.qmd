@@ -1,0 +1,14 @@
+---
+title: "Julla basics"
+format: html
+---
+
+
+## Setup
+
+TODO
+
+## Subsetting
+
+TODO
+

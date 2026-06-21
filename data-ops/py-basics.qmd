@@ -1,0 +1,14 @@
+---
+title: "Python basics"
+format: html
+---
+
+
+## Setup
+
+TODO
+
+## Subsetting
+
+TODO
+

@@ -13,6 +13,7 @@ format:
       - heightrounded
 ---
 
+
 ## Aims
 
 The [R Learning Syllabus](https://exercism.org/tracks/r/concepts) is pretty much our first opportunity within [Exercism][web-exercism] to explore data science operations with dataframes. The traditional `data.frame` and newer `tibble` are include in the test runner, along with Tidyverse libraries such as `dplyr`, `readr`, `tidyr` and `forcats`.
@@ -21,20 +22,75 @@ In contrast, the [Python track][exercism-python] is beginner-biased (they get a 
 
 Hence this separate code playground, where it is possible to install extra packages and work across multiple languages (R, Python, SQL for starters).
 
-The current ~~plan~~ ague aspiration cover all these combinations:
+The current ~~plan~~ vague aspiration cover all these combinations:
 
-|            |  R  | Python |
-|------------|:---:|:------:|
-| data.frame | ✔️  |        |
-| tibble     | ✔️  |        |
-| Pandas     |     |   ✔️   |
-| Polars     | ✔️  |   ✔️   |
-| DuckDB     | ✔️  |   ✔️   |
-| PostgreSQL | ✔️  |   ✔️   |
+|            |  R  | Python | Julia  |
+|------------|:---:|:------:|:------:|
+| data.frame | ✔️  |        |        |
+| tibble     | ✔️  |        |        |
+| data.table | ✔️  |        |        |
+| pandas     |     |   ✔️   |        |
+| DataFrames |     |        |   ✔️   |
+| Polars     | ✔️  |   ✔️   |   ✔️   |
+| DuckDB     | ✔️  |   ✔️   |   ✔️   |
+| PostgreSQL | ✔️  |   ✔️   |   ✔️   |
+| Arrow      | ✔️  |   ✔️   |   ✔️   |
+| Dask       |     |   ✔️   |        |
+
+## Tools
+
+[**data.frame**][ref-data-frame] is part of Base R, and always available to R code.
+
+[**tibble**][ref-tibble] is a Tidyverse package.
+Because it is common for modern R code to start with `library(tidyverse)` (even within Exercism), it will often be available, as will packages such as `dplyr` to manipulate tibbles.
+
+_None of the remaining tools are available in the Exercism R or Python tracks.
+For local use, they must be installed separately._
+
+[**data.table**][ref-data-table]
+
+[**pandas**][ref-pandas] is the oldest type of Python dataframe, very widely used.
+
+[**Polars**][ref-polars] is a newer Rust-based dataframe type, with binding for several languages including R, Python and Julia.
+Reputed to be very fast with larger datasets.
+
+[**DuckDB**][ref-duckdb] is an in-process database (OLAP) server, based mainly (not exclusively) on SQL queries.
+
+[**PostgreSQL**][ref-postgres] is a powerful, open-source relational database server.
+
+[**Apache Arrow**][ref-arrow] is a language-independent columnar memory format for flat and nested data.
+Libraries to work with rrow data exist for many languages, including R, Python and Julia.
+
+[**Dask**][ref-dask] is a pure Python package, pandas-like but optimized for parallel processing of large datasets.
+
+## Usage
+
+For simplicity, examples are split into multiple language-specific documents
+
+### Basics
+
+- [R examples](data-ops/r-basics.qmd)
+- [Python examples](data-ops/py-basics.qmd)
+- [Julia examples](data-ops/jl-basics.qmd)
+
 
 ## Setup
 
 TODO
 
+## Subsetting
+
+TODO
+
+
 [web-exercism]: https://exercism.org/
 [exercism-python]: https://exercism.org/tracks/python
+[ref-data-frame]: https://bioinformatics.ccr.cancer.gov/docs/rintro/Lesson_3/
+[ref-tibble]: https://tibble.tidyverse.org/index.html
+[ref-data-table]: https://r-datatable.com/
+[ref-pandas]: https://pandas.pydata.org/
+[ref-polars]: https://pola.rs/
+[ref-duckdb]: https://duckdb.org/
+[ref-postgres]: https://www.postgresql.org/
+[ref-arrow]: https://arrow.apache.org/
+[ref-dask]: https://www.dask.org/
