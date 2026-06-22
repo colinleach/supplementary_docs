@@ -13,7 +13,6 @@ format:
       - heightrounded
 ---
 
-
 ## Aims
 
 The [R Learning Syllabus](https://exercism.org/tracks/r/concepts) is pretty much our first opportunity within [Exercism][web-exercism] to explore data science operations with dataframes. The traditional `data.frame` and newer `tibble` are include in the test runner, along with Tidyverse libraries such as `dplyr`, `readr`, `tidyr` and `forcats`.
@@ -47,16 +46,17 @@ Because it is common for modern R code to start with `library(tidyverse)` (even 
 _None of the remaining tools are available in the Exercism R or Python tracks.
 For local use, they must be installed separately._
 
-[**data.table**][ref-data-table]
+[**data.table**][ref-data-table] is an R package which (like tibbles) aims to improve on the traditional `data.frame`.
+Reputedly faster than tibbles with large datasets, though less integrated with the Tidyverse ecosystem.
 
 [**pandas**][ref-pandas] is the oldest type of Python dataframe, very widely used.
 
 [**Polars**][ref-polars] is a newer Rust-based dataframe type, with binding for several languages including R, Python and Julia.
 Reputed to be very fast with larger datasets.
 
-[**DuckDB**][ref-duckdb] is an in-process database (OLAP) server, based mainly (not exclusively) on SQL queries.
+[**DuckDB**][ref-duckdb] is an in-process database ([OLAP][wiki-olap]) server, based mainly (not exclusively) on SQL queries.
 
-[**PostgreSQL**][ref-postgres] is a powerful, open-source relational database server.
+[**PostgreSQL**][ref-postgres] is a powerful, open-source relational ([OLTP][wiki-oltp]) database server.
 
 [**Apache Arrow**][ref-arrow] is a language-independent columnar memory format for flat and nested data.
 Libraries to work with rrow data exist for many languages, including R, Python and Julia.
@@ -65,23 +65,14 @@ Libraries to work with rrow data exist for many languages, including R, Python a
 
 ## Usage
 
-For simplicity, examples are split into multiple language-specific documents
+For simplicity, examples are split into multiple language-specific documents.
+Each section should have a similar overall structure across languages.
 
 ### Basics
 
 - [R examples](data-ops/r-basics.qmd)
 - [Python examples](data-ops/py-basics.qmd)
 - [Julia examples](data-ops/jl-basics.qmd)
-
-
-## Setup
-
-TODO
-
-## Subsetting
-
-TODO
-
 
 [web-exercism]: https://exercism.org/
 [exercism-python]: https://exercism.org/tracks/python
@@ -94,3 +85,5 @@ TODO
 [ref-postgres]: https://www.postgresql.org/
 [ref-arrow]: https://arrow.apache.org/
 [ref-dask]: https://www.dask.org/
+[wiki-olap]: https://en.wikipedia.org/wiki/Online_analytical_processing
+[wiki-oltp]: https://en.wikipedia.org/wiki/Online_transaction_processing

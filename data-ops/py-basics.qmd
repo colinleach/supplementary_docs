@@ -8,7 +8,22 @@ format: html
 
 TODO
 
+## Creating
+
+TODO
+
+## Importing data
+
+TODO
+
 ## Subsetting
 
 TODO
 
+## Sorting
+
+TODO
+
+## Modifying
+
+TODO

@@ -130,8 +130,6 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#basics" id="toc-basics" class="nav-link" data-scroll-target="#basics">Basics</a></li>
   </ul></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting">Subsetting</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="data-ops.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
     </div>
@@ -241,17 +239,17 @@ ul.task-list li input[type="checkbox"] {
 <p><a href="https://bioinformatics.ccr.cancer.gov/docs/rintro/Lesson_3/"><strong>data.frame</strong></a> is part of Base R, and always available to R code.</p>
 <p><a href="https://tibble.tidyverse.org/index.html"><strong>tibble</strong></a> is a Tidyverse package. Because it is common for modern R code to start with <code>library(tidyverse)</code> (even within Exercism), it will often be available, as will packages such as <code>dplyr</code> to manipulate tibbles.</p>
 <p><em>None of the remaining tools are available in the Exercism R or Python tracks. For local use, they must be installed separately.</em></p>
-<p><a href="https://r-datatable.com/"><strong>data.table</strong></a></p>
+<p><a href="https://r-datatable.com/"><strong>data.table</strong></a> is an R package which (like tibbles) aims to improve on the traditional <code>data.frame</code>. Reputedly faster than tibbles with large datasets, though less integrated with the Tidyverse ecosystem.</p>
 <p><a href="https://pandas.pydata.org/"><strong>pandas</strong></a> is the oldest type of Python dataframe, very widely used.</p>
 <p><a href="https://pola.rs/"><strong>Polars</strong></a> is a newer Rust-based dataframe type, with binding for several languages including R, Python and Julia. Reputed to be very fast with larger datasets.</p>
-<p><a href="https://duckdb.org/"><strong>DuckDB</strong></a> is an in-process database (OLAP) server, based mainly (not exclusively) on SQL queries.</p>
-<p><a href="https://www.postgresql.org/"><strong>PostgreSQL</strong></a> is a powerful, open-source relational database server.</p>
+<p><a href="https://duckdb.org/"><strong>DuckDB</strong></a> is an in-process database (<a href="https://en.wikipedia.org/wiki/Online_analytical_processing">OLAP</a>) server, based mainly (not exclusively) on SQL queries.</p>
+<p><a href="https://www.postgresql.org/"><strong>PostgreSQL</strong></a> is a powerful, open-source relational (<a href="https://en.wikipedia.org/wiki/Online_transaction_processing">OLTP</a>) database server.</p>
 <p><a href="https://arrow.apache.org/"><strong>Apache Arrow</strong></a> is a language-independent columnar memory format for flat and nested data. Libraries to work with rrow data exist for many languages, including R, Python and Julia.</p>
 <p><a href="https://www.dask.org/"><strong>Dask</strong></a> is a pure Python package, pandas-like but optimized for parallel processing of large datasets.</p>
 </section>
 <section id="usage" class="level2">
 <h2 class="anchored" data-anchor-id="usage">Usage</h2>
-<p>For simplicity, examples are split into multiple language-specific documents</p>
+<p>For simplicity, examples are split into multiple language-specific documents. Each section should have a similar overall structure across languages.</p>
 <section id="basics" class="level3">
 <h3 class="anchored" data-anchor-id="basics">Basics</h3>
 <ul>
@@ -259,17 +257,9 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="./data-ops/py-basics.html">Python examples</a></li>
 <li><a href="./data-ops/jl-basics.html">Julia examples</a></li>
 </ul>
-</section>
-</section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>TODO</p>
-</section>
-<section id="subsetting" class="level2">
-<h2 class="anchored" data-anchor-id="subsetting">Subsetting</h2>
-<p>TODO</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
