@@ -30,7 +30,7 @@ The current ~~plan~~ vague aspiration cover all these combinations:
 | data.table | ✔️  |        |        |
 | pandas     |     |   ✔️   |        |
 | DataFrames |     |        |   ✔️   |
-| Polars     | ✔️  |   ✔️   |   ✔️   |
+| Polars     | ✔️  |   ✔️   |   ?    |
 | DuckDB     | ✔️  |   ✔️   |   ✔️   |
 | PostgreSQL | ✔️  |   ✔️   |   ✔️   |
 | Arrow      | ✔️  |   ✔️   |   ✔️   |

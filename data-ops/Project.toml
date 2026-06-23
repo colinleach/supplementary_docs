@@ -1,0 +1,15 @@
+Arrow = "69666777-d1a9-59fb-9406-91d4454c9d45"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+DuckDB = "d2f5444f-75bc-4fdf-ac35-56f514c445e1"
+FileIO = "5789e2e9-d7fb-5bc7-8068-2c6fae9b9549"
+ImageIO = "82e4d734-157c-48bb-816b-45c225c6df19"
+JuliaFormatter = "98e50ef6-434e-11e9-1051-2b60c6c9e899"
+LanguageServer = "2b0e0bc5-e4fd-59b4-8912-456d1b03d8d7"
+LibPQ = "194296ae-ab2e-5f79-8cd4-7183a0a5a0d1"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"
+
+[deps]
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Arrow = "69666777-d1a9-59fb-9406-91d4454c9d45"
+DuckDB = "d2f5444f-75bc-4fdf-ac35-56f514c445e1"
+LibPQ = "194296ae-ab2e-5f79-8cd4-7183a0a5a0d1"

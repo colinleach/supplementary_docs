@@ -1,12 +1,35 @@
 ---
 title: "Julla basics"
 format: html
+engine: julia
 ---
 
 
 ## Setup
 
-TODO
+### DataFrames
+
+```{julia}
+using DataFrames
+```
+
+### DuckDB
+
+```{julia}
+using DuckDB
+```
+
+### Arrow
+
+```{julia}
+using Arrow
+```
+
+### PostgreSQL
+
+```{julia}
+using LibPQ
+```
 
 ## Creating
 

@@ -2,7 +2,7 @@
 title: "R basics"
 format: 
   html:
-    code-fold: true
+    code-fold: false
   pdf:
     toc: true
     toc-depth: 2
@@ -16,14 +16,20 @@ format:
 
 ## Setup
 
+Other than `data.frame`, packages need to be installed before getting to this stage.
+
 ### data.frame
 
-None needed: this is part of Base R.
+No setup needed: this is part of Base R.
 
 ### tibble
 
 Either `library(tibble)` or (preferably) `library(tidyverse)`.
 The latter also brings in important libraries such as `dplyr`.
+
+```{R}
+library(tidyverse)
+```
 
 Documentation is fairly extensive, in the Tidyverse style:
 
@@ -33,17 +39,43 @@ Documentation is fairly extensive, in the Tidyverse style:
 
 ### data.table
 
+Caution: this does not always play nicely with `tidyverse`.
+It is designed as an alternative approach, not a complement.
+
+```{R}
+library(data.table)
+```
+
+The first time  the library is attached, it gives configuration information.
+On my system:
+
+```
+data.table 1.18.4 using 8 threads (see ?getDTthreads).  Latest news: r-datatable.com
+```
+
 ### Polars
+
+The R bindings for Polars are available in `r-multiverse`, but not in CRAN.
 
 ### DuckDB
 
+```{R}
+library("duckdb")
+```
+
 ### Arrow
+
+TODO
+
+### PostgreSQL
+
+TODO
 
 ## Creating
 
 ### data.frame
 
-```R
+```{R}
 # create the column vectors
 languages <- c("Fortran", "R", "Python", "Julia")
 created <- c(1957, 1993, 1991, 2012)
@@ -52,40 +84,23 @@ has.syllabus <- c(FALSE, TRUE, TRUE, TRUE)
 # join columns to create the dataframe
 df <- data.frame(languages, created, has.syllabus)
 df
-#>   languages created has.syllabus
-#> 1   Fortran    1957        FALSE
-#> 2         R    1993         TRUE
-#> 3    Python    1991         TRUE
-#> 4     Julia    2012         TRUE
+```
 
+```{R}
 # look at the structure
 str(df)
-#> 'data.frame':	4 obs. of  3 variables:
- #> $ languages   : chr  "Fortran" "R" "Python" "Julia"
- #> $ created     : num  1957 1993 1991 2012
- #> $ has.syllabus: logi  FALSE TRUE TRUE TRUE
- ```
+```
 
 ### tibble
 
-```R
+```{R}
 # column vectors are same as for data.frame
-library(tibble)
 tbl <- tibble(languages, created, has.syllabus)
 tbl
-  # A tibble: 4 × 3
-#>   languages created has.syllabus
-#>   <chr>       <dbl> <lgl>       
-#> 1 Fortran      1957 FALSE       
-#> 2 R            1993 TRUE        
-#> 3 Python       1991 TRUE        
-#> 4 Julia        2012 TRUE      
-  
+```
+
+```{R}
 str(tbl)
-#> tibble [4 × 3] (S3: tbl_df/tbl/data.frame)
-#>  $ languages   : chr [1:4] "Fortran" "R" "Python" "Julia"
-#>  $ created     : num [1:4] 1957 1993 1991 2012
-#>  $ has.syllabus: logi [1:4] FALSE TRUE TRUE TRUE
 ```
 
 ### data.table
@@ -117,36 +132,24 @@ str(tbl)
 
 Dataframes, including tibbles, can be treated as lists of column vectors, so list indexing recovers a specified column.
 
-```R
+```{R}
 tbl
-# A tibble: 4 × 3
-#>   languages created has.syllabus
-#>   <chr>       <dbl> <lgl>       
-#> 1 Fortran      1957 FALSE
-#> 2 R            1993 TRUE        
-#> 3 Python       1991 TRUE        
-#> 4 Julia        2012 TRUE    
+```
 
+```{R}
 tbl$created
-#> [1] 1957 1993 1991 2012
 ```
 
 A dataframe can also be indexed with [matrix-style][concept-matrices-arrays] indexing.
 
-```R
+```{R}
 tbl[c(2, 4), 1:2]
-  # A tibble: 2 × 2
-#>   languages created
-#>   <chr>       <dbl>
-#> 1 R            1993
-#> 2 Julia        2012
 ```
 
 Using `dplyr`, get a single column with [`pull()`][ref-pull] with the name or sequential number (negative numbers to count right-to-left).
 
-```R
+```{R}
 tbl |> pull(created)
-#> [1] 1957 1993 1991 2012
 ```
 
 This is the same result as `tbl$created`, but using a pipeline-friendly function.
@@ -154,36 +157,19 @@ This is the same result as `tbl$created`, but using a pipeline-friendly function
 To get multiple columns, the appropriate function is [`select()`][ref-select], which is highly versatile.
 Get (or drop) columns based on properties of their name or type.
 
-```R
+```{R}
 # Range with position and/or name
 tbl |> select(1:created)
-  # A tibble: 4 × 2
-#>   languages created
-#>   <chr>       <dbl>
-#> 1 Fortran      1957
-#> 2 R            1993
-#> 3 Python       1991
-#> 4 Julia        2012
+```
 
+```{R}
 # Exclude a column
 tbl |> select(!created)
-  # A tibble: 4 × 2
-#>   languages has.syllabus
-#>   <chr>     <lgl>       
-#> 1 Fortran   FALSE       
-#> 2 R         TRUE        
-#> 3 Python    TRUE        
-#> 4 Julia     TRUE        
+```
 
+```{R}
 # Use type of column
 tbl |> select(where(is.numeric))
-  # A tibble: 4 × 1
-#>   created
-#>     <dbl>
-#> 1    1957
-#> 2    1993
-#> 3    1991
-#> 4    2012
 ```
 
 Multiple criteria are allowed, using Boolean operators `&`, `|` and `!` (and, or not).
@@ -195,87 +181,62 @@ The [`select()`][ref-select] function can work with a range of helper functions 
 [`matches`][ref-starts_with] allows full [RegEx][concept-regex] matching.
 See the [documentation][ref-select] for details.
 
-```R
+```{R}
 # limit display to top 3 rows of non-list columns
 starwars |> 
   select(!where(is.list)) |> 
   head(3)
-  # A tibble: 3 × 11
-#>   name           height  mass hair_color skin_color  eye_color birth_year sex   gender    homeworld species
-#>   <chr>           <int> <dbl> <chr>      <chr>       <chr>          <dbl> <chr> <chr>     <chr>     <chr>  
-#> 1 Luke Skywalker    172    77 blond      fair        blue              19 male  masculine Tatooine  Human  
-#> 2 C-3PO             167    75 NA         gold        yellow           112 none  masculine Tatooine  Droid  
-#> 3 R2-D2              96    32 NA         white, blue red               33 none  masculine Naboo     Droid  
+```
 
+```{R}
 # pick a subset of columns
 starwars |> 
   select(name | ends_with("color")) |> 
   head(5)
-  # A tibble: 5 × 4
-#>   name           hair_color skin_color  eye_color
-#>   <chr>          <chr>      <chr>       <chr>    
-#> 1 Luke Skywalker blond      fair        blue     
-#> 2 C-3PO          NA         gold        yellow   
-#> 3 R2-D2          NA         white, blue red      
-#> 4 Darth Vader    none       white       yellow   
-#> 5 Leia Organa    brown      light       brown    
 ```
 
 Get rows matching some criteria with [`filter()`][ref-filter], or exclude them with `filter_out()`.
 
-```R
+```{R}
 starwars |> 
   select(name:mass) |> 
   filter(between(height, 150, 165) & !is.na(mass))
-  # A tibble: 4 × 3
-#>   name               height  mass
-#>   <chr>               <int> <dbl>
-#> 1 Leia Organa           150    49
-#> 2 Beru Whitesun Lars    165    75
-#> 3 Nien Nunb             160    68
-#> 4 Ben Quadinaros        163    65
 ```
 
 Filter criteria can be arbitrarily complex, but always based on row _contents_.
 
 If row _numbers_ are known, we can use a variety of [`slice()`][ref-slice] functions.
 
-```R
+```{R}
 starwars |> 
   select(name | homeworld) |> 
   slice(20:25)
-  # A tibble: 6 × 2
-#>   name             homeworld
-#>   <chr>            <chr>    
-#> 1 Palpatine        Naboo    
-#> 2 Boba Fett        Kamino   
-#> 3 IG-88            NA       
-#> 4 Bossk            Trandosha
-#> 5 Lando Calrissian Socorro  
-#> 6 Lobot            Bespin   
+```
 
+```{R}
 # random sample of rows
 starwars |> 
   select(name | homeworld) |> 
   slice_sample(n = 4)
-  # A tibble: 4 × 2
-#>   name            homeworld
-#>   <chr>           <chr>    
-#> 1 Shaak Ti        Shili    
-#> 2 Luminara Unduli Mirial   
-#> 3 Grievous        Kalee    
-#> 4 Palpatine       Naboo    
 ```
 
 To remove duplicate rows, use [`distinct()`][ref-distinct].
 
 ### data.table
 
+TODO
+
 ### Polars
+
+TODO
 
 ### DuckDB
 
+TODO
+
 ### Arrow
+
+TODO
 
 ## Sorting
 
@@ -283,33 +244,27 @@ To remove duplicate rows, use [`distinct()`][ref-distinct].
 
 [`arrange()`][ref-arrange] sorts rows by the values in one or more columns.
 
-```R
+```{R}
 tbl
-  # A tibble: 4 × 3
-#>   languages created has.syllabus
-#>   <chr>       <dbl> <lgl>       
-#> 1 Fortran      1957 FALSE       
-#> 2 R            1993 TRUE        
-#> 3 Python       1991 TRUE        
-#> 4 Julia        2012 TRUE  
+```
 
+```{R}
 tbl |> arrange(languages)
-  # A tibble: 4 × 3
-#>   languages created has.syllabus
-#>   <chr>       <dbl> <lgl>       
-#> 1 Fortran      1957 FALSE       
-#> 2 Julia        2012 TRUE        
-#> 3 Python       1991 TRUE        
-#> 4 R            1993 TRUE     
 ```
 
 ### data.table
 
 ### Polars
 
+TODO
+
 ### DuckDB
 
+TODO
+
 ### Arrow
+
+TODO
 
 
 ## Modifying
@@ -325,25 +280,13 @@ The _contents_ of column `oldname` are _bound_ to name `newname`, hence the orde
 Column order can be changed with [`relocate()`][ref-relocate].
 Specified column(s) are moved to the left-most position(s) by default, but a `.before` or `.after` argument can be used for finer positioning.
 
-```R
+```{R}
 sw <- starwars |> select(name:species) |> slice(1:4)
 sw
-  # A tibble: 4 × 11
-#>   name           height  mass hair_color skin_color  eye_color birth_year sex   gender    homeworld species
-#>   <chr>           <int> <dbl> <chr>      <chr>       <chr>          <dbl> <chr> <chr>     <chr>     <chr>  
-#> 1 Luke Skywalker    172    77 blond      fair        blue            19   male  masculine Tatooine  Human  
-#> 2 C-3PO             167    75 NA         gold        yellow         112   none  masculine Tatooine  Droid  
-#> 3 R2-D2              96    32 NA         white, blue red             33   none  masculine Naboo     Droid  
-#> 4 Darth Vader       202   136 none       white       yellow          41.9 male  masculine Tatooine  Human  
+```
 
+```{R}
 sw |> relocate(c(species, homeworld), .after = name)
-  # A tibble: 4 × 11
-#>   name           species homeworld height  mass hair_color skin_color  eye_color birth_year sex   gender   
-#>   <chr>          <chr>   <chr>      <int> <dbl> <chr>      <chr>       <chr>          <dbl> <chr> <chr>    
-#> 1 Luke Skywalker Human   Tatooine     172    77 blond      fair        blue            19   male  masculine
-#> 2 C-3PO          Droid   Tatooine     167    75 NA         gold        yellow         112   none  masculine
-#> 3 R2-D2          Droid   Naboo         96    32 NA         white, blue red             33   none  masculine
-#> 4 Darth Vader    Human   Tatooine     202   136 none       white       yellow          41.9 male  masculine
 ```
 
 For bigger changes, [`mutate()`][ref-mutate] lets you:
@@ -352,18 +295,11 @@ For bigger changes, [`mutate()`][ref-mutate] lets you:
 - Replace an existing column, by creating a new column with the same name.
 - Delete a column, by setting its value to [`NULL`][concept-nothingness]
 
-```R
+```{R}
 starwars |> 
   select(c(name, species, height, mass)) |> 
   mutate(BMI = mass / (height / 100)^2) |> 
   head(4)
-  # A tibble: 4 × 5
-#>   name           species height  mass   BMI
-#>   <chr>          <chr>    <int> <dbl> <dbl>
-#> 1 Luke Skywalker Human      172    77  26.0
-#> 2 C-3PO          Droid      167    75  26.9
-#> 3 R2-D2          Droid       96    32  34.7
-#> 4 Darth Vader    Human      202   136  33.3
 ```
 
 When you want to operate on a subset of the columns with functions such as `mutate()`, the `select() |> mutate()` sequence in the above example is one option.
@@ -371,23 +307,17 @@ Only the selected columns will be in the result.
 
 Alternatively, it can be convenient to use [`pick()`][ref-pick] _within_ the `mutate()` call:
 
-```R
+```{R}
 starwars |> mutate(pick(c(name, species, height, mass)), BMI = mass / (height / 100)^2) |> head(4)
+```
+
 When you want to operate on a subset of the columns with functions such as `mutate()`, the `select() |> mutate()` sequence in the above example is one option.
 Only the selected columns will be in the result.
 
 Alternatively, it can be convenient to use `pick()` _within_ the `mutate()` call:
 
-```R
+```{R}
 starwars |> mutate(pick(c(name, species, height, mass)), BMI = mass / (height / 100)^2) |> head(4)
-    # A tibble: 4 × 15
-#>   name         height  mass hair_color skin_color eye_color birth_year sex   gender homeworld species films vehicles
-#>   <chr>         <int> <dbl> <chr>      <chr>      <chr>          <dbl> <chr> <chr>  <chr>     <chr>   <lis> <list>  
-#> 1 Luke Skywal…    172    77 blond      fair       blue            19   male  mascu… Tatooine  Human   <chr> <chr>   
-#> 2 C-3PO           167    75 NA         gold       yellow         112   none  mascu… Tatooine  Droid   <chr> <chr>   
-#> 3 R2-D2            96    32 NA         white, bl… red             33   none  mascu… Naboo     Droid   <chr> <chr>   
-#> 4 Darth Vader     202   136 none       white      yellow          41.9 male  mascu… Tatooine  Human   <chr> <chr>   
-   # ℹ 2 more variables: starships <list>, BMI <dbl>
 ```
 
 Only the `pick`ed columns are used in the mutation, but all columns are returned.
@@ -396,9 +326,16 @@ Only the `pick`ed columns are used in the mutation, but all columns are returned
 
 ### Polars
 
+TODO
+
 ### DuckDB
 
+TODO
+
 ### Arrow
+
+TODO
+
 
 
 

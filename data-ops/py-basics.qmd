@@ -6,24 +6,114 @@ format: html
 
 ## Setup
 
-TODO
+Everything needs to be installed before getting to this stage.
+The examples are using a conda env.
+
+### pandas
+
+```{python}
+import pandas as pd
+import numpy as np
+```
+
+### Polars
+
+```{python}
+import polars as pl
+```
+
+### DuckDB
+```{python}
+import duckdb
+```
+
+### Arrow
+
+```{python}
+import pyarrow as pa
+```
 
 ## Creating
 
+### pandas
+
+### Polars
+
 TODO
+
+### DuckDB
+
+TODO
+
+### Arrow
+
+TODO
+
 
 ## Importing data
 
+### pandas
+
+### Polars
+
 TODO
+
+### DuckDB
+
+TODO
+
+### Arrow
+
+TODO
+
 
 ## Subsetting
 
+### pandas
+
+### Polars
+
 TODO
+
+### DuckDB
+
+TODO
+
+### Arrow
+
+TODO
+
 
 ## Sorting
 
+### pandas
+
+### Polars
+
 TODO
+
+### DuckDB
+
+TODO
+
+### Arrow
+
+TODO
+
 
 ## Modifying
 
+### pandas
+
+### Polars
+
 TODO
+
+### DuckDB
+
+TODO
+
+### Arrow
+
+TODO
+

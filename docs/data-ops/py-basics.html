@@ -23,6 +23,41 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -124,12 +159,48 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#creating" id="toc-creating" class="nav-link" data-scroll-target="#creating">Creating</a></li>
-  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a></li>
-  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting">Subsetting</a></li>
-  <li><a href="#sorting" id="toc-sorting" class="nav-link" data-scroll-target="#sorting">Sorting</a></li>
-  <li><a href="#modifying" id="toc-modifying" class="nav-link" data-scroll-target="#modifying">Modifying</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a>
+  <ul class="collapse">
+  <li><a href="#pandas" id="toc-pandas" class="nav-link" data-scroll-target="#pandas">pandas</a></li>
+  <li><a href="#polars" id="toc-polars" class="nav-link" data-scroll-target="#polars">Polars</a></li>
+  <li><a href="#duckdb" id="toc-duckdb" class="nav-link" data-scroll-target="#duckdb">DuckDB</a></li>
+  <li><a href="#arrow" id="toc-arrow" class="nav-link" data-scroll-target="#arrow">Arrow</a></li>
+  </ul></li>
+  <li><a href="#creating" id="toc-creating" class="nav-link" data-scroll-target="#creating">Creating</a>
+  <ul class="collapse">
+  <li><a href="#pandas-1" id="toc-pandas-1" class="nav-link" data-scroll-target="#pandas-1">pandas</a></li>
+  <li><a href="#polars-1" id="toc-polars-1" class="nav-link" data-scroll-target="#polars-1">Polars</a></li>
+  <li><a href="#duckdb-1" id="toc-duckdb-1" class="nav-link" data-scroll-target="#duckdb-1">DuckDB</a></li>
+  <li><a href="#arrow-1" id="toc-arrow-1" class="nav-link" data-scroll-target="#arrow-1">Arrow</a></li>
+  </ul></li>
+  <li><a href="#importing-data" id="toc-importing-data" class="nav-link" data-scroll-target="#importing-data">Importing data</a>
+  <ul class="collapse">
+  <li><a href="#pandas-2" id="toc-pandas-2" class="nav-link" data-scroll-target="#pandas-2">pandas</a></li>
+  <li><a href="#polars-2" id="toc-polars-2" class="nav-link" data-scroll-target="#polars-2">Polars</a></li>
+  <li><a href="#duckdb-2" id="toc-duckdb-2" class="nav-link" data-scroll-target="#duckdb-2">DuckDB</a></li>
+  <li><a href="#arrow-2" id="toc-arrow-2" class="nav-link" data-scroll-target="#arrow-2">Arrow</a></li>
+  </ul></li>
+  <li><a href="#subsetting" id="toc-subsetting" class="nav-link" data-scroll-target="#subsetting">Subsetting</a>
+  <ul class="collapse">
+  <li><a href="#pandas-3" id="toc-pandas-3" class="nav-link" data-scroll-target="#pandas-3">pandas</a></li>
+  <li><a href="#polars-3" id="toc-polars-3" class="nav-link" data-scroll-target="#polars-3">Polars</a></li>
+  <li><a href="#duckdb-3" id="toc-duckdb-3" class="nav-link" data-scroll-target="#duckdb-3">DuckDB</a></li>
+  <li><a href="#arrow-3" id="toc-arrow-3" class="nav-link" data-scroll-target="#arrow-3">Arrow</a></li>
+  </ul></li>
+  <li><a href="#sorting" id="toc-sorting" class="nav-link" data-scroll-target="#sorting">Sorting</a>
+  <ul class="collapse">
+  <li><a href="#pandas-4" id="toc-pandas-4" class="nav-link" data-scroll-target="#pandas-4">pandas</a></li>
+  <li><a href="#polars-4" id="toc-polars-4" class="nav-link" data-scroll-target="#polars-4">Polars</a></li>
+  <li><a href="#duckdb-4" id="toc-duckdb-4" class="nav-link" data-scroll-target="#duckdb-4">DuckDB</a></li>
+  <li><a href="#arrow-4" id="toc-arrow-4" class="nav-link" data-scroll-target="#arrow-4">Arrow</a></li>
+  </ul></li>
+  <li><a href="#modifying" id="toc-modifying" class="nav-link" data-scroll-target="#modifying">Modifying</a>
+  <ul class="collapse">
+  <li><a href="#pandas-5" id="toc-pandas-5" class="nav-link" data-scroll-target="#pandas-5">pandas</a></li>
+  <li><a href="#polars-5" id="toc-polars-5" class="nav-link" data-scroll-target="#polars-5">Polars</a></li>
+  <li><a href="#duckdb-5" id="toc-duckdb-5" class="nav-link" data-scroll-target="#duckdb-5">DuckDB</a></li>
+  <li><a href="#arrow-5" id="toc-arrow-5" class="nav-link" data-scroll-target="#arrow-5">Arrow</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -157,29 +228,124 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<p>TODO</p>
+<p>Everything needs to be installed before getting to this stage. The examples are using a conda env.</p>
+<section id="pandas" class="level3">
+<h3 class="anchored" data-anchor-id="pandas">pandas</h3>
+<div id="bb5b1ecc" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="polars" class="level3">
+<h3 class="anchored" data-anchor-id="polars">Polars</h3>
+<div id="166e6a9a" class="cell" data-execution_count="2">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="duckdb" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb">DuckDB</h3>
+<div id="f14ee332" class="cell" data-execution_count="3">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="arrow" class="level3">
+<h3 class="anchored" data-anchor-id="arrow">Arrow</h3>
+<div id="10df943a" class="cell" data-execution_count="4">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
 </section>
 <section id="creating" class="level2">
 <h2 class="anchored" data-anchor-id="creating">Creating</h2>
+<section id="pandas-1" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-1">pandas</h3>
+</section>
+<section id="polars-1" class="level3">
+<h3 class="anchored" data-anchor-id="polars-1">Polars</h3>
 <p>TODO</p>
+</section>
+<section id="duckdb-1" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb-1">DuckDB</h3>
+<p>TODO</p>
+</section>
+<section id="arrow-1" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-1">Arrow</h3>
+<p>TODO</p>
+</section>
 </section>
 <section id="importing-data" class="level2">
 <h2 class="anchored" data-anchor-id="importing-data">Importing data</h2>
+<section id="pandas-2" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-2">pandas</h3>
+</section>
+<section id="polars-2" class="level3">
+<h3 class="anchored" data-anchor-id="polars-2">Polars</h3>
 <p>TODO</p>
+</section>
+<section id="duckdb-2" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb-2">DuckDB</h3>
+<p>TODO</p>
+</section>
+<section id="arrow-2" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-2">Arrow</h3>
+<p>TODO</p>
+</section>
 </section>
 <section id="subsetting" class="level2">
 <h2 class="anchored" data-anchor-id="subsetting">Subsetting</h2>
+<section id="pandas-3" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-3">pandas</h3>
+</section>
+<section id="polars-3" class="level3">
+<h3 class="anchored" data-anchor-id="polars-3">Polars</h3>
 <p>TODO</p>
+</section>
+<section id="duckdb-3" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb-3">DuckDB</h3>
+<p>TODO</p>
+</section>
+<section id="arrow-3" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-3">Arrow</h3>
+<p>TODO</p>
+</section>
 </section>
 <section id="sorting" class="level2">
 <h2 class="anchored" data-anchor-id="sorting">Sorting</h2>
+<section id="pandas-4" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-4">pandas</h3>
+</section>
+<section id="polars-4" class="level3">
+<h3 class="anchored" data-anchor-id="polars-4">Polars</h3>
 <p>TODO</p>
+</section>
+<section id="duckdb-4" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb-4">DuckDB</h3>
+<p>TODO</p>
+</section>
+<section id="arrow-4" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-4">Arrow</h3>
+<p>TODO</p>
+</section>
 </section>
 <section id="modifying" class="level2">
 <h2 class="anchored" data-anchor-id="modifying">Modifying</h2>
+<section id="pandas-5" class="level3">
+<h3 class="anchored" data-anchor-id="pandas-5">pandas</h3>
+</section>
+<section id="polars-5" class="level3">
+<h3 class="anchored" data-anchor-id="polars-5">Polars</h3>
+<p>TODO</p>
+</section>
+<section id="duckdb-5" class="level3">
+<h3 class="anchored" data-anchor-id="duckdb-5">DuckDB</h3>
+<p>TODO</p>
+</section>
+<section id="arrow-5" class="level3">
+<h3 class="anchored" data-anchor-id="arrow-5">Arrow</h3>
 <p>TODO</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
