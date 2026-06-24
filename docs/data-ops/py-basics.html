@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -105,6 +105,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 <link rel="stylesheet" href="../styles.css">
@@ -231,26 +234,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Everything needs to be installed before getting to this stage. The examples are using a conda env.</p>
 <section id="pandas" class="level3">
 <h3 class="anchored" data-anchor-id="pandas">pandas</h3>
-<div id="bb5b1ecc" class="cell" data-execution_count="1">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="b36a6c40" class="cell" data-execution_count="1">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="polars" class="level3">
 <h3 class="anchored" data-anchor-id="polars">Polars</h3>
-<div id="166e6a9a" class="cell" data-execution_count="2">
+<div id="af7a1c58" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="duckdb" class="level3">
 <h3 class="anchored" data-anchor-id="duckdb">DuckDB</h3>
-<div id="f14ee332" class="cell" data-execution_count="3">
+<div id="84b70722" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="arrow" class="level3">
 <h3 class="anchored" data-anchor-id="arrow">Arrow</h3>
-<div id="10df943a" class="cell" data-execution_count="4">
+<div id="829dbee6" class="cell" data-execution_count="4">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
@@ -259,14 +262,154 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="creating">Creating</h2>
 <section id="pandas-1" class="level3">
 <h3 class="anchored" data-anchor-id="pandas-1">pandas</h3>
+<p>It may be easiest to start from a dictionary.</p>
+<div id="083df435" class="cell" data-execution_count="5">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the column dictionary</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>input_dict <span class="op">=</span> {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'languages'</span>: [<span class="st">'Fortran'</span>, <span class="st">'R'</span>, <span class="st">'Python'</span>, <span class="st">'Julia'</span>],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'created'</span>: [<span class="dv">1957</span>, <span class="dv">1993</span>, <span class="dv">1991</span>, <span class="dv">2012</span>],</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'has_syllabus'</span>: [<span class="va">False</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>input_dict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>{'languages': ['Fortran', 'R', 'Python', 'Julia'],
+ 'created': [1957, 1993, 1991, 2012],
+ 'has_syllabus': [False, True, True, True]}</code></pre>
+</div>
+</div>
+<p>Convert to DataFrame, with keys becoming the column headers:</p>
+<div id="51c003a1" class="cell" data-execution_count="6">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame(input_dict)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">languages</th>
+<th data-quarto-table-cell-role="th">created</th>
+<th data-quarto-table-cell-role="th">has_syllabus</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Fortran</td>
+<td>1957</td>
+<td>False</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>R</td>
+<td>1993</td>
+<td>True</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Python</td>
+<td>1991</td>
+<td>True</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Julia</td>
+<td>2012</td>
+<td>True</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p>The default display does not show types, so get these in an extra step.</p>
+<div id="1ba1f194" class="cell" data-execution_count="7">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df.dtypes</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="24">
+<pre><code>languages         str
+created         int64
+has_syllabus     bool
+dtype: object</code></pre>
+</div>
+</div>
 </section>
 <section id="polars-1" class="level3">
 <h3 class="anchored" data-anchor-id="polars-1">Polars</h3>
-<p>TODO</p>
+<div id="1c42dc64" class="cell" data-execution_count="8">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create the column dictionary</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>input_dict <span class="op">=</span> {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'languages'</span>: [<span class="st">'Fortran'</span>, <span class="st">'R'</span>, <span class="st">'Python'</span>, <span class="st">'Julia'</span>],</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'created'</span>: [<span class="dv">1957</span>, <span class="dv">1993</span>, <span class="dv">1991</span>, <span class="dv">2012</span>],</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'has_syllabus'</span>: [<span class="va">False</span>, <span class="va">True</span>, <span class="va">True</span>, <span class="va">True</span>]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>input_dict</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="25">
+<pre><code>{'languages': ['Fortran', 'R', 'Python', 'Julia'],
+ 'created': [1957, 1993, 1991, 2012],
+ 'has_syllabus': [False, True, True, True]}</code></pre>
+</div>
+</div>
+<p>Convert to DataFrame, with keys becoming the column headers:</p>
+<div id="53bc4124" class="cell" data-execution_count="9">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>pl_df <span class="op">=</span> pl.DataFrame(input_dict)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pl_df</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display" data-execution_count="26">
+<div><style>
+.dataframe > thead > tr,
+.dataframe > tbody > tr {
+  text-align: right;
+  white-space: pre-wrap;
+}
+</style>
+<small>shape: (4, 3)</small>
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th">languages</th>
+<th data-quarto-table-cell-role="th">created</th>
+<th data-quarto-table-cell-role="th">has_syllabus</th>
+</tr>
+<tr class="even">
+<td>str</td>
+<td>i64</td>
+<td>bool</td>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>"Fortran"</td>
+<td>1957</td>
+<td>false</td>
+</tr>
+<tr class="even">
+<td>"R"</td>
+<td>1993</td>
+<td>true</td>
+</tr>
+<tr class="odd">
+<td>"Python"</td>
+<td>1991</td>
+<td>true</td>
+</tr>
+<tr class="even">
+<td>"Julia"</td>
+<td>2012</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Note that the default display is not really Pythonic, with double-quoted string and lowercase bools. We are working with a thin layer over Rust.</p>
 </section>
 <section id="duckdb-1" class="level3">
 <h3 class="anchored" data-anchor-id="duckdb-1">DuckDB</h3>
-<p>TODO</p>
+<p>Creating a data source from scratch within DuckDB is relatively unusual.</p>
+<p>Just use whatever you have: pandas or Polars dataframes, CSV, Parquet or JSON files, remote database connections…</p>
 </section>
 <section id="arrow-1" class="level3">
 <h3 class="anchored" data-anchor-id="arrow-1">Arrow</h3>

@@ -12,8 +12,8 @@ The examples are using a conda env.
 ### pandas
 
 ```{python}
-import pandas as pd
 import numpy as np
+import pandas as pd
 ```
 
 ### Polars
@@ -37,13 +37,58 @@ import pyarrow as pa
 
 ### pandas
 
+It may be easiest to start from a dictionary.
+
+```{python}
+# create the column dictionary
+input_dict = {
+    'languages': ['Fortran', 'R', 'Python', 'Julia'],
+    'created': [1957, 1993, 1991, 2012],
+    'has_syllabus': [False, True, True, True]
+    }
+input_dict
+```
+
+Convert to DataFrame, with keys becoming the column headers:
+
+```{python}
+df = pd.DataFrame(input_dict)
+df
+```
+
+The default display does not show types, so get these in an extra step.
+
+```{python}
+df.dtypes
+```
+
 ### Polars
 
-TODO
+```{python}
+# create the column dictionary
+input_dict = {
+    'languages': ['Fortran', 'R', 'Python', 'Julia'],
+    'created': [1957, 1993, 1991, 2012],
+    'has_syllabus': [False, True, True, True]
+    }
+input_dict
+```
+
+Convert to DataFrame, with keys becoming the column headers:
+
+```{python}
+pl_df = pl.DataFrame(input_dict)
+pl_df
+```
+
+Note that the default display is not really Pythonic, with double-quoted string and lowercase bools.
+We are working with a thin layer over Rust.
 
 ### DuckDB
 
-TODO
+Creating a data source from scratch within DuckDB is relatively unusual.
+
+Just use whatever you have: pandas or Polars dataframes, CSV, Parquet or JSON files, remote database connections...
 
 ### Arrow
 

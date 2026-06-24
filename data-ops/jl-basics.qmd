@@ -1,5 +1,5 @@
 ---
-title: "Julla basics"
+title: "Julia basics"
 format: html
 engine: julia
 ---

@@ -100,21 +100,21 @@
   {
     "objectID": "data-ops/jl-basics.html",
     "href": "data-ops/jl-basics.html",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "",
     "text": "using DataFrames\n\n\n\n\n\nusing DuckDB\n\n\n\n\n\nusing Arrow\n\n\n\n\n\nusing LibPQ"
   },
   {
     "objectID": "data-ops/jl-basics.html#setup",
     "href": "data-ops/jl-basics.html#setup",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "",
     "text": "using DataFrames\n\n\n\n\n\nusing DuckDB\n\n\n\n\n\nusing Arrow\n\n\n\n\n\nusing LibPQ"
   },
   {
     "objectID": "data-ops/jl-basics.html#subsetting",
     "href": "data-ops/jl-basics.html#subsetting",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "Subsetting",
     "text": "Subsetting\nTODO"
   },
@@ -144,14 +144,14 @@
     "href": "data-ops/py-basics.html",
     "title": "Python basics",
     "section": "",
-    "text": "Everything needs to be installed before getting to this stage. The examples are using a conda env.\n\n\n\nimport pandas as pd\nimport numpy as np\n\n\n\n\n\nimport polars as pl\n\n\n\n\n\nimport duckdb\n\n\n\n\n\nimport pyarrow as pa"
+    "text": "Everything needs to be installed before getting to this stage. The examples are using a conda env.\n\n\n\nimport numpy as np\nimport pandas as pd\n\n\n\n\n\nimport polars as pl\n\n\n\n\n\nimport duckdb\n\n\n\n\n\nimport pyarrow as pa"
   },
   {
     "objectID": "data-ops/py-basics.html#setup",
     "href": "data-ops/py-basics.html#setup",
     "title": "Python basics",
     "section": "",
-    "text": "Everything needs to be installed before getting to this stage. The examples are using a conda env.\n\n\n\nimport pandas as pd\nimport numpy as np\n\n\n\n\n\nimport polars as pl\n\n\n\n\n\nimport duckdb\n\n\n\n\n\nimport pyarrow as pa"
+    "text": "Everything needs to be installed before getting to this stage. The examples are using a conda env.\n\n\n\nimport numpy as np\nimport pandas as pd\n\n\n\n\n\nimport polars as pl\n\n\n\n\n\nimport duckdb\n\n\n\n\n\nimport pyarrow as pa"
   },
   {
     "objectID": "data-ops/py-basics.html#subsetting",
@@ -191,28 +191,28 @@
   {
     "objectID": "data-ops/jl-basics.html#creating",
     "href": "data-ops/jl-basics.html#creating",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "Creating",
     "text": "Creating\nTODO"
   },
   {
     "objectID": "data-ops/jl-basics.html#importing-data",
     "href": "data-ops/jl-basics.html#importing-data",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "Importing data",
     "text": "Importing data\nTODO"
   },
   {
     "objectID": "data-ops/jl-basics.html#sorting",
     "href": "data-ops/jl-basics.html#sorting",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "Sorting",
     "text": "Sorting\nTODO"
   },
   {
     "objectID": "data-ops/jl-basics.html#modifying",
     "href": "data-ops/jl-basics.html#modifying",
-    "title": "Julla basics",
+    "title": "Julia basics",
     "section": "Modifying",
     "text": "Modifying\nTODO"
   },
@@ -221,7 +221,7 @@
     "href": "data-ops/py-basics.html#creating",
     "title": "Python basics",
     "section": "Creating",
-    "text": "Creating\n\npandas\n\n\nPolars\nTODO\n\n\nDuckDB\nTODO\n\n\nArrow\nTODO"
+    "text": "Creating\n\npandas\nIt may be easiest to start from a dictionary.\n\n# create the column dictionary\ninput_dict = {\n    'languages': ['Fortran', 'R', 'Python', 'Julia'],\n    'created': [1957, 1993, 1991, 2012],\n    'has_syllabus': [False, True, True, True]\n    }\ninput_dict\n\n{'languages': ['Fortran', 'R', 'Python', 'Julia'],\n 'created': [1957, 1993, 1991, 2012],\n 'has_syllabus': [False, True, True, True]}\n\n\nConvert to DataFrame, with keys becoming the column headers:\n\ndf = pd.DataFrame(input_dict)\ndf\n\n\n\n\n\n\n\n\nlanguages\ncreated\nhas_syllabus\n\n\n\n\n0\nFortran\n1957\nFalse\n\n\n1\nR\n1993\nTrue\n\n\n2\nPython\n1991\nTrue\n\n\n3\nJulia\n2012\nTrue\n\n\n\n\n\n\n\nThe default display does not show types, so get these in an extra step.\n\ndf.dtypes\n\nlanguages         str\ncreated         int64\nhas_syllabus     bool\ndtype: object\n\n\n\n\nPolars\n\n# create the column dictionary\ninput_dict = {\n    'languages': ['Fortran', 'R', 'Python', 'Julia'],\n    'created': [1957, 1993, 1991, 2012],\n    'has_syllabus': [False, True, True, True]\n    }\ninput_dict\n\n{'languages': ['Fortran', 'R', 'Python', 'Julia'],\n 'created': [1957, 1993, 1991, 2012],\n 'has_syllabus': [False, True, True, True]}\n\n\nConvert to DataFrame, with keys becoming the column headers:\n\npl_df = pl.DataFrame(input_dict)\npl_df\n\n\nshape: (4, 3)\n\n\n\nlanguages\ncreated\nhas_syllabus\n\n\nstr\ni64\nbool\n\n\n\n\n\"Fortran\"\n1957\nfalse\n\n\n\"R\"\n1993\ntrue\n\n\n\"Python\"\n1991\ntrue\n\n\n\"Julia\"\n2012\ntrue\n\n\n\n\n\n\nNote that the default display is not really Pythonic, with double-quoted string and lowercase bools. We are working with a thin layer over Rust.\n\n\nDuckDB\nCreating a data source from scratch within DuckDB is relatively unusual.\nJust use whatever you have: pandas or Polars dataframes, CSV, Parquet or JSON files, remote database connections…\n\n\nArrow\nTODO"
   },
   {
     "objectID": "data-ops/py-basics.html#importing-data",
