@@ -114,7 +114,61 @@ TODO
 
 ## Subsetting
 
+An important difference is whether row names are used (pandas) or not (Polars, SQL).
+
 ### pandas
+
+In our toy example, we set column names:
+
+```{python}
+df.columns
+```
+
+Row "names" are called the `index` in pandas.
+We did not set them explicitly, so pandas falls back to the implicit index of sequential integers.
+
+The explicit/implicit distinction is important in pandas indexing, and in Python "explicit is better than implcit".
+
+```{python}
+df.index
+```
+
+To get a cell value, the `.at` attribute uses explicit indices, `.iat` uses implicit.
+The `[row, col]` syntax copies Numpy.
+
+```{python}
+df.at[2, 'languages']
+```
+
+```{python}
+df.iat[1, 0]
+```
+
+Retrieve a single column with indexing, or use the column name as an attribute.
+
+```{python}
+df['languages']
+```
+
+```{python}
+df.languages
+```
+
+For multiple columns, use `.loc` or `.iloc` with a list or a range of columns.
+As in NumPy, the `:, ` means all rows:
+
+```{python}
+df.loc[:, 'languages':'created']
+```
+
+Note that pandas ranges differ from core Python, as both the start and the stop are _included_.
+
+For regex matching of column names, use the `filter()` method (which can also do other things).
+
+```{python}
+df.filter(regex = '^[lh]')
+```
+
 
 ### Polars
 
